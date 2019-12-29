@@ -1,7 +1,7 @@
 local DoorInfo	= {}
 
 RegisterServerEvent('redemrp_doorlocks:updatedoorsv')
-AddEventHandler('redemrp_doorlocks:updatedoorsv', function(source, doorID, lock, cb)
+AddEventHandler('redemrp_doorlocks:updatedoorsv', function(source, doorID, cb)
     local _source = tonumber(source)
     TriggerEvent('redemrp:getPlayerFromId', _source, function(user)        
         if not IsAuthorized(user.getJob(), Config.DoorList[doorID]) then
