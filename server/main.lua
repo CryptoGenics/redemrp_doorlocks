@@ -1,11 +1,11 @@
 local DoorInfo	= {}
 
 RegisterServerEvent('redemrp_doorlocks:updatedoorsv')
-AddEventHandler('redemrp_doorlocks:updatedoorsv', function(source, doorID, cb)
+AddEventHandler('redemrp_doorlocks:updatedoorsv', function(source, doorID, lock, cb)
     local _source = tonumber(source)
     TriggerEvent('redemrp:getPlayerFromId', _source, function(user)        
         if not IsAuthorized(user.getJob(), Config.DoorList[doorID]) then
-			TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1Your are not LEO!^0")
+			TriggerClientEvent('chatMessage', source, "", {0, 0, 200}, "^1You do not have a key!^0")
             return
         else 
             TriggerClientEvent('redemrp_doorlocks:changedoor', _source, doorID)
@@ -15,10 +15,18 @@ AddEventHandler('redemrp_doorlocks:updatedoorsv', function(source, doorID, cb)
 end)
 
 RegisterServerEvent('redemrp_doorlocks:updateState')
-AddEventHandler('redemrp_doorlocks:updateState', function(source, doorID, state, cb)
+AddEventHandler('redemrp_doorlocks:updateState', function(doorID, state)
     local _source = tonumber(source)
     TriggerEvent('redemrp:getPlayerFromId', _source, function(user)
 		if type(doorID) ~= 'number' then
+			return
+		end
+
+		if type(state) ~= 'boolean' then
+			return
+		end
+
+		if not Config.DoorList[doorID] then
 			return
 		end
 
@@ -26,18 +34,15 @@ AddEventHandler('redemrp_doorlocks:updateState', function(source, doorID, state,
 			return
 		end
 
-		DoorInfo[doorID] = {}
-
-		DoorInfo[doorID].state = state
-		DoorInfo[doorID].doorID = doorID
+		doorInfo[doorID] = state
 
 		TriggerClientEvent('redemrp_doorlocks:setState', -1, doorID, state)
-    end)
+	end)
 end)
 
 function IsAuthorized(jobName, doorID)
-	for i=1, #doorID.authorizedJobs, 1 do
-		if doorID.authorizedJobs[i] == jobName then
+	for _,job in pairs(doorID.authorizedJobs) do
+		if job == jobName then
 			return true
 		end
 	end
