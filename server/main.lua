@@ -15,18 +15,10 @@ AddEventHandler('redemrp_doorlocks:updatedoorsv', function(source, doorID, cb)
 end)
 
 RegisterServerEvent('redemrp_doorlocks:updateState')
-AddEventHandler('redemrp_doorlocks:updateState', function(source, doorID, state, cb)
+AddEventHandler('redemrp_doorlocks:updateState', function(doorID, state, cb)
     local _source = tonumber(source)
     TriggerEvent('redemrp:getPlayerFromId', _source, function(user)
 		if type(doorID) ~= 'number' then
-			return
-		end
-
-		if type(state) ~= 'boolean' then
-			return
-		end
-
-		if not Config.DoorList[doorID] then
 			return
 		end
 
@@ -34,10 +26,10 @@ AddEventHandler('redemrp_doorlocks:updateState', function(source, doorID, state,
 			return
 		end
 
-		doorInfo[doorID] = state
+		DoorInfo[doorID] = {}
 
 		TriggerClientEvent('redemrp_doorlocks:setState', -1, doorID, state)
-	end)
+    end)
 end)
 
 function IsAuthorized(jobName, doorID)
