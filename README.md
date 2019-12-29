@@ -14,4 +14,4 @@ RedM door locks made for redem_roleplay
 # Made by
 - CryptoGenics
 - Based off old version of https://github.com/ESX-PUBLIC/esx_doorlock
-- Thanks to spAnser#0001 for the help with figuring out how to grab the door entities
+- Thanks to https://github.com/spAnser for the help with figuring out how to grab the door entities
