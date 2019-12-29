@@ -6,7 +6,6 @@ Citizen.CreateThread(function()
 				for k,v in ipairs(doorID.doors) do
 					if not v.object or not DoesEntityExist(v.object) then
 						local shapeTest = StartShapeTestBox(v.objCoords, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, true, 16)
-						--v.object = GetClosestObjectOfType(v.objCoords, 1.0, GetHashKey(v.objName), false, false, false)
 						local rtnVal, hit, endCoords, surfaceNormal, entityHit = GetShapeTestResult(shapeTest)
 						v.object = entityHit
 					end
