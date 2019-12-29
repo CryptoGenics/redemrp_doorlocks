@@ -15,7 +15,7 @@ AddEventHandler('redemrp_doorlocks:updatedoorsv', function(source, doorID, cb)
 end)
 
 RegisterServerEvent('redemrp_doorlocks:updateState')
-AddEventHandler('redemrp_doorlocks:updateState', function(doorID, state)
+AddEventHandler('redemrp_doorlocks:updateState', function(source, doorID, state, cb)
     local _source = tonumber(source)
     TriggerEvent('redemrp:getPlayerFromId', _source, function(user)
 		if type(doorID) ~= 'number' then
