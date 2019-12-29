@@ -77,7 +77,7 @@ Citizen.CreateThread(function()
 				DrawText3D(doorID.textCoords.x, doorID.textCoords.y, doorID.textCoords.z, displayText)
 
 				if IsControlJustPressed(2, 0xE8342FF2) then -- Hold ALT
-					TriggerEvent("redemrp_doorlocks:updatedoor", GetPlayerServerId(), k, doorID.locked)
+					TriggerEvent("redemrp_doorlocks:updatedoor", GetPlayerServerId(), k)
 				end
 			end
 		end
@@ -89,12 +89,12 @@ Citizen.CreateThread(function()
 end)
 
 RegisterNetEvent('redemrp_doorlocks:updatedoor')
-AddEventHandler('redemrp_doorlocks:updatedoor', function(source, door, lock) 
-    TriggerServerEvent("redemrp_doorlocks:updatedoorsv", source, door, lock, function(cb) end) --Perms check
+AddEventHandler('redemrp_doorlocks:updatedoor', function(source, door) 
+    TriggerServerEvent("redemrp_doorlocks:updatedoorsv", source, door, function(cb) end) --Perms check
 end)
 
 RegisterNetEvent('redemrp_doorlocks:changedoor')
-AddEventHandler('redemrp_doorlocks:changedoor', function(doorID, lock)
+AddEventHandler('redemrp_doorlocks:changedoor', function(doorID)
 	local name   = Config.DoorList[doorID]
 	name.locked = not name.locked
 	TriggerServerEvent('redemrp_doorlocks:updateState', doorID, name.locked, function(cb) end)
