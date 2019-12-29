@@ -10,8 +10,8 @@ Config.DoorList = {
 	{
 		authorizedJobs = { 'police' },
 		doorName = 'P_DOOR_VAL_JAIL02x',
-		doorCoords  = {x = -276.04, y = 802.73, z = 118.41},
-		textCoords  = {x = -275.02, y = 802.84, z = 119.43},
+		objCoords  = vector3(-276.04, 802.73, 118.41),
+		textCoords  = vector3(-275.02, 802.84, 119.43),
 		locked = true,
 		objYaw = 10.0,
 		distance = 3.0
@@ -19,8 +19,8 @@ Config.DoorList = {
 	{
 		authorizedJobs = { 'police' },
 		doorName = 'P_DOOR_VAL_JAIL01X',
-		doorCoords  = {x = -275.85, y = 812.02, z = 118.41},
-		textCoords  = {x = -277.06, y = 811.83, z = 119.38},
+		objCoords  = vector3(-275.85, 812.02, 118.41),
+		textCoords  = vector3(-277.06, 811.83, 119.38),
 		objYaw = -170.0,
 		locked = true,
 		distance = 3.0
@@ -33,8 +33,8 @@ Config.DoorList = {
 	{
 		authorizedJobs = { 'police' },
 		doorName = 'P_DOORRHOSHERIFF02X',
-		doorCoords  = {x = 1359.71, y = -1305.97, z = 76.76},
-		textCoords  = {x = 1358.42, y = -1305.71, z = 77.72},
+		objCoords  = vector3(1359.71, -1305.97, 76.76),
+		textCoords  = vector3(1358.42, -1305.71, 77.72),
 		objYaw = 160.0,
 		locked = false,
 		distance = 3.0
@@ -42,8 +42,8 @@ Config.DoorList = {
 	{
 		authorizedJobs = { 'police' },
 		doorName = 'P_DOOR04X',
-		doorCoords  = {x = 1359.12, y = -1297.56, z = 76.78},
-		textCoords  = {x = 1358.51, y = -1298.95, z = 77.78},
+		objCoords  = vector3(1359.12, -1297.56, 76.78),
+		textCoords  = vector3(1358.51, -1298.95,77.78),
 		objYaw = -110.0,
 		locked = true,
 		distance = 3.0
@@ -54,23 +54,24 @@ Config.DoorList = {
 	--
 
 	{
+		textCoords = vector3(-757.27, -1269.34, 44.04),
 		authorizedJobs = { 'police' },
-		doorName = 'P-DOOR_BLA_JAIL_R_01X',
-		doorCoords  = {x = -757.14, y = -1268.52, z = 43.06},
-		textCoords  = {x = -756.84, y = -1269.22, z = 44.03},
-		objYaw = 90.0,
-		locked = true,
-		distance = 3.0
+		locked = false,
+		distance = 2.5,
+		doors = {
+			{
+				objName = 'v_ilev_ph_door01',
+				objYaw = 90.0,
+				objCoords = vector3(-757.05, -1268.49, 43.06)
+			},
+
+			{
+				objName = 'v_ilev_ph_door002',
+				objYaw = 90.0,
+				objCoords = vector3(-757.05, -1269.93, 43.06)
+			}
+		}
 	},
-	{
-		authorizedJobs = { 'police' },
-		doorName = 'DOOR_BLA_JAIL_R_01X',
-		doorCoords  = {x = -757.14, y = -1269.89, z = 43.06},
-		textCoords  = {x = -756.84, y = -1269.22, z = 44.03},
-		objYaw = 90.0,
-		locked = true,
-		distance = 3.0
-	},
-	
+
 
 }
