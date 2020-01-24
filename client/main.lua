@@ -104,10 +104,7 @@ Citizen.CreateThread(function()
 						timeHeld = timeHeld + 5
 						PromptSetEnabled(OpenPrompt, false)
 						PromptSetVisible(OpenPrompt, false)
-						PromptSetEnabled(PickPrompt, false)
-						PromptSetVisible(PickPrompt, false)
 						prompt = false
-						prompt2 = false
 						TriggerEvent("redemrp_doorlocks:updatedoor", GetPlayerServerId(), k)
 					end
 					if timeHeld > 0 then
