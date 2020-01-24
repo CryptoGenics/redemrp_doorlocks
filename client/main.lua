@@ -1,3 +1,21 @@
+local prompt = false
+local OpenPrompt
+local timeHeld = 0
+
+function SetupOpenPrompt()
+    Citizen.CreateThread(function()
+        local str = 'Lock'
+        OpenPrompt = PromptRegisterBegin()
+        PromptSetControlAction(OpenPrompt, 0xE8342FF2)
+        str = CreateVarString(10, 'LITERAL_STRING', str)
+        PromptSetText(OpenPrompt, str)
+        PromptSetEnabled(OpenPrompt, false)
+        PromptSetVisible(OpenPrompt, false)
+        PromptSetHoldMode(OpenPrompt, true)
+        PromptRegisterEnd(OpenPrompt)
+    end)
+end
+
 -- Get objects every second, instead of every frame
 Citizen.CreateThread(function()
 	while true do
@@ -24,6 +42,7 @@ Citizen.CreateThread(function()
 end)
 
 Citizen.CreateThread(function()
+	SetupOpenPrompt()
 	while true do
 		Citizen.Wait(0)
 		local playerCoords, letSleep = GetEntityCoords(PlayerPedId()), true
@@ -74,9 +93,33 @@ Citizen.CreateThread(function()
 				end
 
 				DrawText3D(doorID.textCoords.x, doorID.textCoords.y, doorID.textCoords.z, displayText)
+				if distance < 1.75 then
+					if prompt == false then
+						PromptSetEnabled(OpenPrompt, true)
+						PromptSetVisible(OpenPrompt, true)
 
-				if IsControlJustPressed(2, 0xE8342FF2) then -- Hold ALT
-					TriggerEvent("redemrp_doorlocks:updatedoor", GetPlayerServerId(), k)
+													prompt = true
+					end
+					if PromptHasHoldModeCompleted(OpenPrompt) and timeHeld < 1 then
+						timeHeld = timeHeld + 5
+						PromptSetEnabled(OpenPrompt, false)
+						PromptSetVisible(OpenPrompt, false)
+						PromptSetEnabled(PickPrompt, false)
+						PromptSetVisible(PickPrompt, false)
+						prompt = false
+						prompt2 = false
+						TriggerEvent("redemrp_doorlocks:updatedoor", GetPlayerServerId(), k)
+					end
+					if timeHeld > 0 then
+						timeHeld = timeHeld - 1
+					end
+				else 
+					if prompt then
+						PromptSetEnabled(OpenPrompt, false)
+						PromptSetVisible(OpenPrompt, false)
+						prompt = false
+					end
+					timeHeld = 0
 				end
 			end
 		end
