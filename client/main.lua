@@ -151,6 +151,14 @@ AddEventHandler('redemrp_doorlocks:changedoor', function(doorID, state)
 	ChangeStateText(Config.DoorList[doorID].textCoords, state)
 	prop_name = 'P_KEY02X'
 	local ped = PlayerPedId()
+        local p1 = GetEntityCoords(ped, true)
+        local p2 = Config.DoorList[doorID].textCoords
+        local dx = p2.x - p1.x
+        local dy = p2.y - p1.y
+
+        local heading = GetHeadingFromVector_2d(dx, dy)
+        SetPedDesiredHeading( ped, heading )
+
 	local x,y,z = table.unpack(GetEntityCoords(ped, true))
 	local prop = CreateObject(GetHashKey(prop_name), x, y, z + 0.2, true, true, true)
 	local boneIndex = GetEntityBoneIndexByName(ped, "SKEL_R_Finger12")
