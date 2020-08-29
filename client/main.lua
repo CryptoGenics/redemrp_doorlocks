@@ -157,7 +157,7 @@ AddEventHandler('redemrp_doorlocks:changedoor', function(doorID, state)
         local dy = p2.y - p1.y
 
         local heading = GetHeadingFromVector_2d(dx, dy)
-        SetEntityHeading( ped, heading )
+        SetPedDesiredHeading( ped, heading )
 
 	local x,y,z = table.unpack(GetEntityCoords(ped, true))
 	local prop = CreateObject(GetHashKey(prop_name), x, y, z + 0.2, true, true, true)
